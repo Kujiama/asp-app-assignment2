@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Assignment2.Database;
 using Assignment2.Models;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assignment2.Controllers
 {
+  
     public class ItemsController : Controller
     {
         private readonly Assign2DBContext _context;
@@ -47,6 +49,7 @@ namespace Assignment2.Controllers
         }
 
         // GET: Items/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
