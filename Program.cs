@@ -1,6 +1,7 @@
 using Assignment2.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Assignment2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,15 @@ builder.Services.AddRouting(options =>
 builder.Services.AddDbContext<Assign2DBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StockDatabase")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<Assign2DBContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<Assign2DBContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
+
+    
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();

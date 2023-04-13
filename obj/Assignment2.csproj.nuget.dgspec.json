@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj": {}
+    "C:\\Users\\TDotN\\source\\repos\\asp-app-assignment2-2\\Assignment2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj": {
+    "C:\\Users\\TDotN\\source\\repos\\asp-app-assignment2-2\\Assignment2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj",
+        "projectUniqueName": "C:\\Users\\TDotN\\source\\repos\\asp-app-assignment2-2\\Assignment2.csproj",
         "projectName": "Assignment2",
-        "projectPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj",
+        "projectPath": "C:\\Users\\TDotN\\source\\repos\\asp-app-assignment2-2\\Assignment2.csproj",
         "packagesPath": "C:\\Users\\TDotN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\obj\\",
+        "outputPath": "C:\\Users\\TDotN\\source\\repos\\asp-app-assignment2-2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,13 +44,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.16, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.15, )"
+              "version": "[6.0.16, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -66,15 +70,19 @@
               "target": "Package",
               "version": "[6.0.16, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.16, )"
             },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
-              "version": "[6.0.13, )"
+              "version": "[6.0.16, )"
             }
           },
           "imports": [
