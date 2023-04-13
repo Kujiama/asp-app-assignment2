@@ -1,27 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\engla\\Source\\Repos\\asp-app-assignment2\\Assignment2.csproj": {}
+    "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\engla\\Source\\Repos\\asp-app-assignment2\\Assignment2.csproj": {
+    "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\engla\\Source\\Repos\\asp-app-assignment2\\Assignment2.csproj",
+        "projectUniqueName": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj",
         "projectName": "Assignment2",
-        "projectPath": "C:\\Users\\engla\\Source\\Repos\\asp-app-assignment2\\Assignment2.csproj",
-        "packagesPath": "C:\\Users\\engla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\engla\\Source\\Repos\\asp-app-assignment2\\obj\\",
+        "projectPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\Assignment2.csproj",
+        "packagesPath": "C:\\Users\\TDotN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-2\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\engla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TDotN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -92,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
