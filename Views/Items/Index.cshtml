@@ -6,6 +6,16 @@
 
 <h1>Index</h1>
 
+<div class="d-flex justify-content-lg-between">
+    <h2>All Items Available</h2>
+    <form asp-action="Index" method="get">
+        <div class="form-group">
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search By Name or Category" width="700" />
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
 <p>
     <a asp-action="Create">Auction Item</a>
 </p>

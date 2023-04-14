@@ -77,11 +77,11 @@
 				}
 				<input type="file"
 					   name="file"
-		accept=".png,.jpg,.jpeg,.gif,.tif"
+						accept=".png,.jpg,.jpeg,.gif,.tif"
 					   asp-for="ItemPicture"
-		class="form-control"
-		style="border:0px!important;padding:0px;padding-top:10px;padding-bottom:30px;"
-		onchange="document.getElementById('itemPicture').src=window.URL.createObjectURL(this.files[0])" />
+						class="form-control"
+						style="border:0px!important;padding:0px;padding-top:10px;padding-bottom:30px;"
+						onchange="document.getElementById('itemPicture').src=window.URL.createObjectURL(this.files[0])" />
 				<span asp-validation-for="ItemPicture" class="text-danger"></span>
 
 
