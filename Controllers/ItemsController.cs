@@ -26,12 +26,18 @@ namespace Assignment2.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-              return _context.Items != null ? 
-                          View(await _context.Items.ToListAsync()) :
-                          Problem("Entity set 'Assign2DBContext.Items'  is null.");
+            ViewData["CurrentFilter"] = SearchString;
+            var item = from i in _context.Items
+                       select i;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                item = item.Where(i => i.Name.Contains(SearchString) || i.Category.Contains(SearchString));
+            }
+            return View(item);
         }
+
 
         // GET: Items/Details/5
         public async Task<IActionResult> Details(int? id)
