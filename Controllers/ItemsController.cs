@@ -25,27 +25,27 @@ namespace Assignment2.Controllers
 			_context = context;
 		}
 
-		// GET: Items
-		public async Task<IActionResult> Index(string SearchString)
-		{
-			ViewData["CurrentFilter"] = SearchString;
-			var item = from i in _context.Items
-					   select i;
-			if (!String.IsNullOrEmpty(SearchString))
-			{
-				item = item.Where(i => i.Name.Contains(SearchString) || i.Category.Contains(SearchString));
-			}
-			return View(item);
-		}
+        // GET: Items
+        public async Task<IActionResult> Index(string SearchString)
+        {
+            ViewData["CurrentFilter"] = SearchString;
+            var item = from i in _context.Items
+                       select i;
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                item = item.Where(i => i.Name.Contains(SearchString) || i.Category.Contains(SearchString));
+            }
+            return View(item);
+        }
 
 
-		// GET: Items/Details/5
-		public async Task<IActionResult> Details(int? id)
-		{
-			if (id == null || _context.Items == null)
-			{
-				return NotFound();
-			}
+        // GET: Items/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Items == null)
+            {
+                return NotFound();
+            }
 
 			var item = await _context.Items
 				.FirstOrDefaultAsync(m => m.Id == id);
