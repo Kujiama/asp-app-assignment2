@@ -9,6 +9,9 @@ using Assignment2.Database;
 using Assignment2.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Identity;
+using System.Text;
 
 namespace Assignment2.Controllers
 {
@@ -16,7 +19,7 @@ namespace Assignment2.Controllers
     public class ItemsController : Controller
     {
         private readonly Assign2DBContext _context;
-
+   
         public ItemsController(Assign2DBContext context)
         {
             _context = context;
@@ -60,11 +63,19 @@ namespace Assignment2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category")] Item item)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category")] Item item, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+				if (file != null && file.Length > 0)
+				{
+					using (var dataStream = new MemoryStream())
+					{
+						await file.CopyToAsync(dataStream);
+						item.ItemPicture = dataStream.ToArray();
+					}
+				}
+				_context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

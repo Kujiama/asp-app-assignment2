@@ -94,7 +94,8 @@ namespace Assignment2.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [Phone]
+            [StringLength(10,ErrorMessage = "The phone number must be 10 digits")]
+            [RegularExpression("^[0-9]+$", ErrorMessage = "The phone number must contain only numbers.")]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
@@ -116,7 +117,13 @@ namespace Assignment2.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-        }
+
+
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
+        
+
+    }
 
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -146,6 +153,7 @@ namespace Assignment2.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Email = Input.Email,
+                    ProfilePicture = Input.ProfilePicture
                 };
 
 
@@ -164,6 +172,7 @@ namespace Assignment2.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
+
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
@@ -181,8 +190,8 @@ namespace Assignment2.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-            }
 
+            }
             // If we got this far, something failed, redisplay form
             return Page();
         }

@@ -1,77 +1,102 @@
 ﻿@model Assignment2.Models.Item
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 <h1>Auction Item</h1>
 
 <h4>Item Details</h4>
 <hr />
+<form asp-action="Create" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-md-6">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Description" class="control-label"></label>
+				<input asp-for="Description" class="form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="MinimumBid" class="control-label"></label>
+				<input asp-for="MinimumBid" class="form-control" />
+				<span asp-validation-for="MinimumBid" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="StartBidDate" class="control-label"></label>
+				<input asp-for="StartBidDate" class="form-control" />
+				<span asp-validation-for="StartBidDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="EndBidDate" class="control-label"></label>
+				<input asp-for="EndBidDate" class="form-control" />
+				<span asp-validation-for="EndBidDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Condition" class="control-label">Condition</label>
+				<select class="form-control" name="Condition" id="Condition">
+					<option value="">-- Select a condition --</option>
+					<option value="Brand New">Brand New</option>
+					<option value="Used">Used</option>
+					<option value="Refurbished">Refurbished</option>
+					<option value="OpenBox">Open Box</option>
+				</select>
+				<span asp-validation-for="Condition" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Category" class="control-label">Category</label>
+				<select class="form-control" name="Category" id="Category">
+					<option value="">-- Select a category --</option>
+					<option value="Electonics">Electronics</option>
+					<option value="Fashion">Fashion</option>
+					<option value="Home">Home</option>
+					<option value="Sports">Sports</option>
+				</select>
+				<span asp-validation-for="Category" class="text-danger"></span>
+			</div>
+			<input type="submit" value="Create" class="btn btn-primary" />
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MinimumBid" class="control-label"></label>
-                <input asp-for="MinimumBid" class="form-control" />
-                <span asp-validation-for="MinimumBid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartBidDate" class="control-label"></label>
-                <input asp-for="StartBidDate" class="form-control" />
-                <span asp-validation-for="StartBidDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndBidDate" class="control-label"></label>
-                <input asp-for="EndBidDate" class="form-control" />
-                <span asp-validation-for="EndBidDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Condition" class="control-label">Condition</label>
-                <select class="form-control" name="Condition" id="Condition">
-                    <option value="">-- Select a condition --</option>
-                    <option value="Brand New">Brand New</option>
-                    <option value="Used">Used</option>
-                    <option value="Refurbished">Refurbished</option>
-                    <option value="OpenBox">Open Box</option>
-                </select>
-                <span asp-validation-for="Condition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label">Category</label>
-                <select class="form-control" name="Category" id="Category">
-                    <option value="">-- Select a category --</option>
-                    <option value="Electonics">Electronics</option>
-                    <option value="Fashion">Fashion</option>
-                    <option value="Home">Home</option>
-                    <option value="Sports">Sports</option>
-                </select>
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-          
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+		</div>
+			<div class="col-md-6">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="ItemPicture" style="width: 100%"></label>
+					@if (Model != null && Model.ItemPicture != null)
+					{
+						<img id="itemPicture" style="width:350px;height: 350px; object-fit:cover"
+							 src="data:image/*;base64,@(Convert.ToBase64String(Model.ItemPicture))">
+					}
+					else
+					{
+						<img id="itemPicture" style="width:350px;height:350px;object-fit:cover" src="" />
+					}
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+					
+					<input type="file"
+						accept=".png,.jpg,.jpeg,.gif,tif"
+						asp-for="ItemPicture"
+						class="form-control"
+						style="border:0px!important;padding:0px;padding-top:10px;padding-bottom:30px;"
+						onchange="document.getElementById('itemPicture').src=window.URL.createObjectURL(this.files[0])" />
+						<span asp-validation-for="ItemPicture" class="text-danger"></span>
 
+				</div>
+			</div>
+	
+
+		<div>
+			<a asp-action="Index">Back to List</a>
+		</div>
+	</div>
+</form>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+	}
 }
