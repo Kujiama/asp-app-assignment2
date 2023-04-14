@@ -52,6 +52,16 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Category)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemPicture)
+        </dt>
+        <dd class = "col-sm-10">
+            @if (Model.ItemPicture != null && Model.ItemPicture.Length > 0)
+            {
+                string base64String = Convert.ToBase64String(Model.ItemPicture);
+                <img src="data:image/png;base64,@base64String" alt="Item Picture" width="350" height="350" />
+            }
+        </dd>
     </dl>
 </div>
 <div>
