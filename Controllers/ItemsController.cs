@@ -15,178 +15,188 @@ using System.Text;
 
 namespace Assignment2.Controllers
 {
-  
-    public class ItemsController : Controller
-    {
-        private readonly Assign2DBContext _context;
-   
-        public ItemsController(Assign2DBContext context)
-        {
-            _context = context;
-        }
 
-        // GET: Items
-        public async Task<IActionResult> Index()
-        {
-              return _context.Items != null ? 
-                          View(await _context.Items.ToListAsync()) :
-                          Problem("Entity set 'Assign2DBContext.Items'  is null.");
-        }
+	public class ItemsController : Controller
+	{
+		private readonly Assign2DBContext _context;
 
-        // GET: Items/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Items == null)
-            {
-                return NotFound();
-            }
+		public ItemsController(Assign2DBContext context)
+		{
+			_context = context;
+		}
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
+		// GET: Items
+		public async Task<IActionResult> Index()
+		{
+			return _context.Items != null ?
+						View(await _context.Items.ToListAsync()) :
+						Problem("Entity set 'Assign2DBContext.Items'  is null.");
+		}
 
-            return View(item);
-        }
+		// GET: Items/Details/5
+		public async Task<IActionResult> Details(int? id)
+		{
+			if (id == null || _context.Items == null)
+			{
+				return NotFound();
+			}
 
-        // GET: Items/Create
-        [Authorize]
-        public IActionResult Create()
-        {
-            return View();
-        }
+			var item = await _context.Items
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (item == null)
+			{
+				return NotFound();
+			}
 
-        // POST: Items/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
-        {
-            if (ModelState.IsValid)
-            {
-                if (file != null && file.Length > 0)
-                {
-                    using (var dataStream = new MemoryStream())
-                    {
-                        await file.CopyToAsync(dataStream);
-                        item.ItemPicture = dataStream.ToArray();
-                    }
-                }
+			return View(item);
+		}
 
-                _context.Add(item);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var modelState in ModelState.Values)
-                {
-                    foreach (var error in modelState.Errors)
-                    {
-                        Console.WriteLine($"Error: {error.ErrorMessage}");
-                    }
-                }
-            }
-            return View(item);
-        }
+		// GET: Items/Create
+		[Authorize]
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-        // GET: Items/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Items == null)
-            {
-                return NotFound();
-            }
+		// POST: Items/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
+		{
+			if (ModelState.IsValid)
+			{
+				if (file != null && file.Length > 0)
+				{
+					using (var dataStream = new MemoryStream())
+					{
+						await file.CopyToAsync(dataStream);
+						item.ItemPicture = dataStream.ToArray();
+					}
+				}
 
-            var item = await _context.Items.FindAsync(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return View(item);
-        }
+				_context.Add(item);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
+			else
+			{
+				var errors = ModelState.Values.SelectMany(v => v.Errors);
+				foreach (var modelState in ModelState.Values)
+				{
+					foreach (var error in modelState.Errors)
+					{
+						Console.WriteLine($"Error: {error.ErrorMessage}");
+					}
+				}
+			}
+			return View(item);
+		}
 
-        // POST: Items/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category")] Item item)
-        {
-            if (id != item.Id)
-            {
-                return NotFound();
-            }
+		// GET: Items/Edit/5
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null || _context.Items == null)
+			{
+				return NotFound();
+			}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(item);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ItemExists(item.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(item);
-        }
+			var item = await _context.Items.FindAsync(id);
+			if (item == null)
+			{
+				return NotFound();
+			}
+			return View(item);
+		}
 
-        // GET: Items/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Items == null)
-            {
-                return NotFound();
-            }
+		// POST: Items/Edit/5
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
+		{
+			if (id != item.Id)
+			{
+				return NotFound();
+			}
 
-            var item = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					if (file != null && file.Length > 0)
+					{
+						using (var dataStream = new MemoryStream())
+						{
+							await file.CopyToAsync(dataStream);
+							item.ItemPicture = dataStream.ToArray();
+						}
+					}
 
-            return View(item);
-        }
+					_context.Update(item);
+					await _context.SaveChangesAsync();
+					return RedirectToAction(nameof(Index));
+				}
+				catch (DbUpdateConcurrencyException)
+				{
+					if (!ItemExists(item.Id))
+					{
+						return NotFound();
+					}
+					else
+					{
+						throw;
+					}
+				}
+				
+			}
+			return View(item);
+		}
 
-        // POST: Items/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Items == null)
-            {
-                return Problem("Entity set 'Assign2DBContext.Items'  is null.");
-            }
-            var item = await _context.Items.FindAsync(id);
-            if (item != null)
-            {
-                _context.Items.Remove(item);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+		// GET: Items/Delete/5
+		public async Task<IActionResult> Delete(int? id)
+		{
+			if (id == null || _context.Items == null)
+			{
+				return NotFound();
+			}
 
-        private bool ItemExists(int id)
-        {
-          return (_context.Items?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-        
-       
-    }
+			var item = await _context.Items
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (item == null)
+			{
+				return NotFound();
+			}
+
+			return View(item);
+		}
+
+		// POST: Items/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteConfirmed(int id)
+		{
+			if (_context.Items == null)
+			{
+				return Problem("Entity set 'Assign2DBContext.Items'  is null.");
+			}
+			var item = await _context.Items.FindAsync(id);
+			if (item != null)
+			{
+				_context.Items.Remove(item);
+			}
+
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+		}
+
+		private bool ItemExists(int id)
+		{
+			return (_context.Items?.Any(e => e.Id == id)).GetValueOrDefault();
+		}
+
+
+	}
 }
