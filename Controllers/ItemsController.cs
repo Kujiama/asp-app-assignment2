@@ -113,6 +113,7 @@ namespace Assignment2.Controllers
             {
                 return NotFound();
             }
+            item.ItemPicture = _context.Items.AsNoTracking().FirstOrDefault(i => i.Id == id)?.ItemPicture;
             return View(item);
         }
 
@@ -121,7 +122,7 @@ namespace Assignment2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
         {
             if (id != item.Id)
             {
@@ -132,8 +133,17 @@ namespace Assignment2.Controllers
             {
                 try
                 {
+                    if (file != null && file.Length > 0)
+                    {
+                        using (var dataStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(dataStream);
+                            item.ItemPicture = dataStream.ToArray();
+                        }
+                    }
                     _context.Update(item);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -146,11 +156,11 @@ namespace Assignment2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(item);
         }
 
+        
         // GET: Items/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
