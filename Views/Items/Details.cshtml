@@ -1,4 +1,5 @@
-﻿@model Assignment2.Models.Item
+﻿@using System.Security.Claims;
+@model Assignment2.Models.Item
 
 @{
     ViewData["Title"] = "Details";
@@ -65,7 +66,7 @@
     </dl>
 </div>
 <div>
-    @if (User.Identity.IsAuthenticated)
+    @if (Model.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
     {
         <a asp-action="Edit" asp-route-id="@Model?.Id">Edit |</a>
     }

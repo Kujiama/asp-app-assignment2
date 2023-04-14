@@ -50,6 +50,12 @@ namespace Assignment2.Database
 			{
 				entity.ToTable(name: "UserTokens");
 			});
-		}
+            base.OnModelCreating(builder);
+            builder.Entity<Item>()
+                   .HasOne(i => i.User)
+                   .WithMany()
+                   .HasForeignKey(i => i.UserId);
+
+        }
 	}
 }

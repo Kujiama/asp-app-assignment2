@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Assignment2.Models.Item>
+﻿@using System.Security.Claims;
+@model IEnumerable<Assignment2.Models.Item>
 
 @{
     ViewData["Title"] = "Index";
@@ -82,13 +83,12 @@
                     }
             </td>
             <td>       
-                    @if (User.Identity.IsAuthenticated)
+                    @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                     {
                           <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a> 
                           <a asp-action="Delete" asp-route-id="@item.Id">Delete | </a>
                     }
 
-              
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                
             </td>

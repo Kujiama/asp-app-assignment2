@@ -11,7 +11,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Session;
 using System.Text;
+using System.Security.Claims;
+
 
 namespace Assignment2.Controllers
 {
@@ -19,10 +22,12 @@ namespace Assignment2.Controllers
 	public class ItemsController : Controller
 	{
 		private readonly Assign2DBContext _context;
+		private readonly UserManager<ApplicationUser> _userManager;
 
-		public ItemsController(Assign2DBContext context)
+		public ItemsController(Assign2DBContext context, UserManager<ApplicationUser> userManager)
 		{
 			_context = context;
+			_userManager = userManager;
 		}
 
         // GET: Items
@@ -54,6 +59,7 @@ namespace Assignment2.Controllers
 				return NotFound();
 			}
 
+
 			return View(item);
 		}
 
@@ -73,6 +79,7 @@ namespace Assignment2.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+
 				if (file != null && file.Length > 0)
 				{
 					using (var dataStream = new MemoryStream())
@@ -81,10 +88,14 @@ namespace Assignment2.Controllers
 						item.ItemPicture = dataStream.ToArray();
 					}
 				}
-
-				_context.Add(item);
-				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				if (User.Identity.IsAuthenticated)
+				{
+					var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+					item.UserId = userId;
+					_context.Add(item);
+					await _context.SaveChangesAsync();
+					return RedirectToAction(nameof(Index));
+				}
 			}
 			else
 			{
@@ -101,7 +112,6 @@ namespace Assignment2.Controllers
 		}
 
 		// GET: Items/Edit/5
-		[Authorize]
 		public async Task<IActionResult> Edit(int? id)
 		{
 			if (id == null || _context.Items == null)
@@ -125,6 +135,12 @@ namespace Assignment2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
         {
+			var currentUser = await _userManager.GetUserAsync(User);
+
+			if(item.UserId != currentUser.Id)
+			{
+				return Forbid();
+			}
             if (id != item.Id)
             {
                 return NotFound();
@@ -163,7 +179,6 @@ namespace Assignment2.Controllers
 
 
 		// GET: Items/Delete/5
-		[Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Items == null)

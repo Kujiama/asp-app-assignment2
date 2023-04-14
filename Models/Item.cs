@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -39,6 +40,12 @@ namespace Assignment2.Models
     {
         [Key] // Primary key for Item
         public int Id { get; set; }
+
+        [ForeignKey ("User")]
+        public string? UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser? User { get; set; }
+
 
         [Display(Name = "Item Name")]
         [Required(ErrorMessage = "Please enter a valid item name")]
