@@ -4,7 +4,6 @@
     {
         SuperAdmin,
         Admin,
-        Moderator,
-        Basic
+        Client
     }
 }

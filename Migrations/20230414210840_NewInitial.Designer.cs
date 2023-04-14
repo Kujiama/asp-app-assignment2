@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(Assign2DBContext))]
-    [Migration("20230413061033_Added Custom Properties")]
-    partial class AddedCustomProperties
+    [Migration("20230414210840_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -14,8 +14,6 @@ namespace Assignment2.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Please select a Condition")]
         public ConditionType Type { get; set; }
     }
 }

@@ -101,6 +101,7 @@ namespace Assignment2.Controllers
 		}
 
 		// GET: Items/Edit/5
+		[Authorize]
 		public async Task<IActionResult> Edit(int? id)
 		{
 			if (id == null || _context.Items == null)
@@ -160,8 +161,9 @@ namespace Assignment2.Controllers
             return View(item);
         }
 
-        
-        // GET: Items/Delete/5
+
+		// GET: Items/Delete/5
+		[Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Items == null)
