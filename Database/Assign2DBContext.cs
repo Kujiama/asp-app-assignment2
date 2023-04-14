@@ -3,7 +3,7 @@ using Assignment2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
+using System.Runtime.ExceptionServices;
 
 namespace Assignment2.Database
 {
@@ -11,6 +11,7 @@ namespace Assignment2.Database
     {
         public Assign2DBContext(DbContextOptions options) : base(options)
         {
+		
         }
 
         public DbSet<Item> Items { get; set; }

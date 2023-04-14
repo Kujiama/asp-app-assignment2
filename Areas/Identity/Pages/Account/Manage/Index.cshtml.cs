@@ -30,7 +30,7 @@ namespace Assignment2.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        public string Username { get; set; }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -67,7 +67,7 @@ namespace Assignment2.Areas.Identity.Pages.Account.Manage
             public string LastName { get; set; }
 
             [Display(Name = "Username")]
-            public string Username { get; set; }
+            public string UserName { get; set; }
 
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -85,13 +85,13 @@ namespace Assignment2.Areas.Identity.Pages.Account.Manage
             var lastName = user.LastName;
             var profilePicture = user.ProfilePicture;
 
-            Username = userName;
+        
 
             Input = new InputModel
             {
                 FirstName = firstName,
                 LastName = lastName,
-                Username = userName,
+                UserName = userName,
                 PhoneNumber = phoneNumber,
                 ProfilePicture = profilePicture
             };
@@ -106,7 +106,7 @@ namespace Assignment2.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
             
-            UserNameChangeLimitMessage = $"You can change your name {user.UsernameChangeLimit} more time(s)";
+            UserNameChangeLimitMessage = $"You can change your username {user.UsernameChangeLimit} more time(s)";
             
             await LoadAsync(user);
             return Page();
@@ -139,16 +139,17 @@ namespace Assignment2.Areas.Identity.Pages.Account.Manage
 
             if (user.UsernameChangeLimit > 0)
             {
-                if (Input.Username != user.UserName)
+                if (Input.UserName != user.UserName)
                 {
-                    var usernameexists = await _userManager.FindByNameAsync(Input.Username);
-                    if (usernameexists != null)
+                    var userNameExists = await _userManager.FindByNameAsync(Input.UserName);
+                    if (userNameExists != null)
                     {
                         StatusMessage = "User name already taken. select a different username";
+                        return RedirectToPage();
                     }
                     else
                     {
-                        user.UserName = Input.Username;
+                        user.UserName = Input.UserName;
                         user.UsernameChangeLimit -= 1;
                         await _userManager.UpdateAsync(user);
                     }

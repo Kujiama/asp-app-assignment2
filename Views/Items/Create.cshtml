@@ -59,7 +59,7 @@
 				</select>
 				<span asp-validation-for="Category" class="text-danger"></span>
 			</div>
-			<input type="submit" value="Create" class="btn btn-primary" />
+			<input type="submit" value="Add Item" class="btn btn-primary" />
 
 		</div>
 			<div class="col-md-6">
@@ -75,10 +75,9 @@
 					{
 						<img id="itemPicture" style="width:350px;height:350px;object-fit:cover" src="" />
 					}
-
-					
 					<input type="file"
-						accept=".png,.jpg,.jpeg,.gif,tif"
+						name = "file"
+						accept=".png,.jpg,.jpeg,.gif,.tif"
 						asp-for="ItemPicture"
 						class="form-control"
 						style="border:0px!important;padding:0px;padding-top:10px;padding-bottom:30px;"
@@ -87,8 +86,6 @@
 
 				</div>
 			</div>
-	
-
 		<div>
 			<a asp-action="Index">Back to List</a>
 		</div>

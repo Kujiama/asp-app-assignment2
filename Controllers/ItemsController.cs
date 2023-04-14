@@ -63,19 +63,20 @@ namespace Assignment2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category")] Item item, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-				if (file != null && file.Length > 0)
-				{
-					using (var dataStream = new MemoryStream())
-					{
-						await file.CopyToAsync(dataStream);
-						item.ItemPicture = dataStream.ToArray();
-					}
-				}
-				_context.Add(item);
+                if (file != null && file.Length > 0)
+                {
+                    using (var dataStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(dataStream);
+                        item.ItemPicture = dataStream.ToArray();
+                    }
+                }
+
+                _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
