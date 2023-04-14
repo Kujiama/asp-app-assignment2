@@ -53,6 +53,15 @@ body {
     font-size: 28px;
 }
 
+.logout {
+    font-weight: 400;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 15px #8e54e9;
+}
+
 
 .nav-item {
     display: block;
