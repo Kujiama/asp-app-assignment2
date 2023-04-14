@@ -108,66 +108,66 @@ namespace Assignment2.Controllers
 				return NotFound();
 			}
 
-			var item = await _context.Items.FindAsync(id);
-			if (item == null)
-			{
-				return NotFound();
-			}
-			return View(item);
-		}
+            var item = await _context.Items.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            item.ItemPicture = _context.Items.AsNoTracking().FirstOrDefault(i => i.Id == id)?.ItemPicture;
+            return View(item);
+        }
 
-		// POST: Items/Edit/5
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
-		{
-			if (id != item.Id)
-			{
-				return NotFound();
-			}
+        // POST: Items/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
+        {
+            if (id != item.Id)
+            {
+                return NotFound();
+            }
 
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					if (file != null && file.Length > 0)
-					{
-						using (var dataStream = new MemoryStream())
-						{
-							await file.CopyToAsync(dataStream);
-							item.ItemPicture = dataStream.ToArray();
-						}
-					}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (file != null && file.Length > 0)
+                    {
+                        using (var dataStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(dataStream);
+                            item.ItemPicture = dataStream.ToArray();
+                        }
+                    }
+                    _context.Update(item);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ItemExists(item.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(item);
+        }
 
-					_context.Update(item);
-					await _context.SaveChangesAsync();
-					return RedirectToAction(nameof(Index));
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!ItemExists(item.Id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				
-			}
-			return View(item);
-		}
-
-		// GET: Items/Delete/5
-		public async Task<IActionResult> Delete(int? id)
-		{
-			if (id == null || _context.Items == null)
-			{
-				return NotFound();
-			}
+        
+        // GET: Items/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Items == null)
+            {
+                return NotFound();
+            }
 
 			var item = await _context.Items
 				.FirstOrDefaultAsync(m => m.Id == id);
