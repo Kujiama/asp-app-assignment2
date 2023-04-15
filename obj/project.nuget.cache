@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3fzZYKXQ9TZOlX1knj0vd2Hlk+/dGcbUABWi3mf8dp1ikaEn+qG9tvM4ZIrxiDbXBHTi0TSyqoPWx1LRR7bwEA==",
+  "dgSpecHash": "gtRcq50GYEHXsdjtIt5H510Oyv2BLjft+LF0pgNnevP8Txhpw3OP3tgqfqjQGq5WUBN65ccar0vqKindfAtXIQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\musta\\Source\\Repos\\asp-app-assignment222\\Assignment2.csproj",
+  "projectFilePath": "C:\\Users\\musta\\Source\\Repos\\asp-\\Assignment2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\musta\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\musta\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -87,7 +87,7 @@
                     }
                 </td>
                 <td>
-                    @if (item.EndBidDate > DateTime.Now)
+                    @if (item.StartBidDate < DateTime.Now && item.EndBidDate > DateTime.Now)
                     {
                         <p>Open</p>
                     }
