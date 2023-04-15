@@ -43,6 +43,7 @@ namespace Assignment2.Models
 
         [ForeignKey ("User")]
         public string? UserId { get; set; }
+        [Display(Name = "Seller")]
         [ForeignKey("UserId")]
         public virtual ApplicationUser? User { get; set; }
 
