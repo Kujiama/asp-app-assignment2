@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "RJklTDOerjUhbQaKdlb+M23WTEkmm3rhIvWGi86+wp5aIXm1QTnC88sgQvhrQHdlKAvyRUDW/X7E/nCXJzpp2g==",
   "success": true,
   "projectFilePath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-April14-1\\Assignment2.csproj",
+=======
+  "dgSpecHash": "gtRcq50GYEHXsdjtIt5H510Oyv2BLjft+LF0pgNnevP8Txhpw3OP3tgqfqjQGq5WUBN65ccar0vqKindfAtXIQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\musta\\Source\\Repos\\asp-\\Assignment2.csproj",
+>>>>>>> 38c49f03ac6e1bd782147edb3daf958869b9c4a4
   "expectedPackageFiles": [
     "C:\\Users\\TDotN\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\TDotN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
