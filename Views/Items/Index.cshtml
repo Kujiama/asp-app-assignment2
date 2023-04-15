@@ -49,6 +49,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.ItemPicture)
             </th>
+            <th>
+                <p>Bidding Status</p>
+            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -81,6 +85,17 @@
                         string base64String = Convert.ToBase64String(item.ItemPicture);
                         <img src="data:image/png;base64,@base64String" alt="Item Picture" width="100" height="100" />
                     }
+                </td>
+                <td>
+                    @if (item.EndBidDate > DateTime.Now)
+                    {
+                        <p>Open</p>
+                    }
+                    else
+                    {
+                        <p>Closed</p>
+                    }
+
                 </td>
 				<td>
 					<a asp-action="Details" asp-route-id="@item.Id">Details </a>
