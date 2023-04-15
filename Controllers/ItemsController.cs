@@ -23,6 +23,7 @@ namespace Assignment2.Controllers
 	{
 		private readonly Assign2DBContext _context;
 		private readonly UserManager<ApplicationUser> _userManager;
+		
 
 		public ItemsController(Assign2DBContext context, UserManager<ApplicationUser> userManager)
 		{
@@ -220,5 +221,6 @@ namespace Assignment2.Controllers
 		}
 
 
-	}
+
+    }
 }

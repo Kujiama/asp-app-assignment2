@@ -15,6 +15,7 @@ namespace Assignment2.Database
         }
 
         public DbSet<Item> Items { get; set; }
+		public DbSet<Bid> Bids { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
