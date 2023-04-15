@@ -133,14 +133,10 @@ namespace Assignment2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,Description,MinimumBid,StartBidDate,EndBidDate,Condition,Category,ItemPicture")] Item item, IFormFile file)
         {
 			var currentUser = await _userManager.GetUserAsync(User);
 
-			if(item.UserId != currentUser.Id)
-			{
-				return Forbid();
-			}
             if (id != item.Id)
             {
                 return NotFound();
@@ -150,6 +146,7 @@ namespace Assignment2.Controllers
             {
                 try
                 {
+					item.UserId = currentUser.Id;
                     if (file != null && file.Length > 0)
                     {
                         using (var dataStream = new MemoryStream())

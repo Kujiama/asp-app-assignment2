@@ -3418,23 +3418,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\musta\\.nuget\\packages\\": {},
+    "C:\\Users\\TDotN\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\musta\\Source\\Repos\\asp-app-assignment222\\Assignment2.csproj",
+      "projectUniqueName": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-April14-1\\Assignment2.csproj",
       "projectName": "Assignment2",
-      "projectPath": "C:\\Users\\musta\\Source\\Repos\\asp-app-assignment222\\Assignment2.csproj",
-      "packagesPath": "C:\\Users\\musta\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\musta\\Source\\Repos\\asp-app-assignment222\\obj\\",
+      "projectPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-April14-1\\Assignment2.csproj",
+      "packagesPath": "C:\\Users\\TDotN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TDotN\\Source\\Repos\\asp-app-assignment2-April14-1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\musta\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TDotN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3442,7 +3442,6 @@
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
