@@ -52,44 +52,50 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinimumBid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartBidDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndBidDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Condition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinimumBid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartBidDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndBidDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
                     @if (item.ItemPicture != null && item.ItemPicture.Length > 0)
                     {
                         string base64String = Convert.ToBase64String(item.ItemPicture);
                         <img src="data:image/png;base64,@base64String" alt="Item Picture" width="100" height="100" />
                     }
-            </td>
-            <td>       
+                </td>
+				<td>
+					<a asp-action="Details" asp-route-id="@item.Id">Details | </a>
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
                     @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                     {
-                          <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a> 
-                          <a asp-action="Delete" asp-route-id="@item.Id">Delete | </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete | </a>
                     }
 
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+               
                
             </td>
         </tr>

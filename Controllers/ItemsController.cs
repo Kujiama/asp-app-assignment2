@@ -110,7 +110,6 @@ namespace Assignment2.Controllers
 			}
 			return View(item);
 		}
-
 		// GET: Items/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
